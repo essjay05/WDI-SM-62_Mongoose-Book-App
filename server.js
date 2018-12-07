@@ -1,4 +1,5 @@
 require('dotenv').config();
+const Book = require('./models/book')
 
 const
     express = require('express'),
@@ -18,8 +19,15 @@ app.use(express.static(path.join(__dirname, 'public', 'views')));
 app.use(logger('dev'));
 
 // Routes
-app.get('/', (req, res) => {
-    res.sendFile('index.html')
+        // app.get('/', (req, res) => {
+        //     res.sendFile('index.html')
+        // }); TOLD BY INSTRUCTIONS TO REPLACE WITH THE FOLLOWING CODE:
+app.get('/api/books', (req,res) => {
+    // send all books as JSON response
+    Book.find({}, (err, books) => {
+        if (err) res.json({success: false, err});
+        res.json({success: true, books});
+    });
 });
 
 /**
