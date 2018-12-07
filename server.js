@@ -1,11 +1,11 @@
 require('dotenv').config();
-const Book = require('./models/book')
 
 const
     express = require('express'),
     app = express(),
     path = require('path'),
     logger = require('morgan'),
+    Book = require('./models/book'),
     PORT = process.env.PORT || 3000;
 
 // Database
@@ -24,48 +24,9 @@ app.use(express.json());
         //     res.sendFile('index.html')
         // }); TOLD BY INSTRUCTIONS TO REPLACE WITH THE FOLLOWING CODE:
 
-// SHOW ALL BOOKS:
-app.get('/api/books', (req,res) => {
-    // send all books as JSON response
-    Book.find({}, (err, books) => {
-        if (err) res.json({success: false, err});
-        res.json({success: true, books});
-    });
-});
+const bookRouter = require('./routers/bookRouter');
+app.use('/api/books', bookRouter);
 
-
-// CREATE A BOOK:
-app.post('/api/books', (req, res) => {
-    Book.create(req.body, (err, newBook) => {
-        if (err) res.json({success: false, err});
-        res.json({ success: true, newBook});
-    });
-});
-
-// INDEX: FIND 1 book using it's ID
-app.get('/api/books/:id', (req, res) => {
-    Book.findById(req.params.id, (err, book) => {
-        if (err) res.json({ success: false, err});
-        res.json({ success: true, book});
-    });
-});
-
-// UPDATE A BOOK:
-app.patch('/api/books/:id', (req, res) => {
-    let {body, params} = req;
-    Book.findByIdAndUpdate(params.id, body, {new: true}, (err, updatedUser) => {
-        if (err) res.json({ succes: false, err});
-        res.json({ success: true, updatedUser});
-    });
-});
-
-// DESTROY / DELETE A BOOK:
-app.delete('/api/books/:id', (req, res) => {
-    Book.findByIdAndDelete(req.params.id, (err, deletedBook) => {
-        if (err) res.json({ success: false, err});
-        res.json({success: true, deletedBook});
-    });
-});
 /**
 |--------------------------------------------------
 | Required Routes
