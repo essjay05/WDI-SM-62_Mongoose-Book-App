@@ -23,6 +23,8 @@ app.use(express.json());
         // app.get('/', (req, res) => {
         //     res.sendFile('index.html')
         // }); TOLD BY INSTRUCTIONS TO REPLACE WITH THE FOLLOWING CODE:
+
+// SHOW ALL BOOKS:
 app.get('/api/books', (req,res) => {
     // send all books as JSON response
     Book.find({}, (err, books) => {
@@ -30,7 +32,7 @@ app.get('/api/books', (req,res) => {
         res.json({success: true, books});
     });
 });
-// SHOW ALL BOOKS:
+
 
 // CREATE A BOOK:
 app.post('/api/books', (req, res) => {
@@ -58,6 +60,12 @@ app.patch('/api/books/:id', (req, res) => {
 });
 
 // DESTROY / DELETE A BOOK:
+app.delete('/api/books/:id', (req, res) => {
+    Book.findByIdAndDelete(req.params.id, (err, deletedBook) => {
+        if (err) res.json({ success: false, err});
+        res.json({success: true, deletedBook});
+    });
+});
 /**
 |--------------------------------------------------
 | Required Routes
