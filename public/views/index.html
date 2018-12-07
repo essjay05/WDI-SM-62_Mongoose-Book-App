@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GA Book Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    <script defer src="js/main.js"></script>
+    <!-- Axios CDN -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Milligram CDN -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+
+</head>
+<body>
+    <header>
+        <h1>GA Book Store</h1>
+    </header>
+    <section id="book-form">   
+        <form class="row">
+            <div class="col">
+                <input type="text" name="title" placeholder="Title...">
+            </div>
+            <div class="col">
+                <input type="text" name="author" placeholder="Author...">
+            </div>
+            <div class="col">
+                <input type="submit">
+            </div>
+        </form>
+    </section>
+    <section class="row" id="book-list">
+        <h2>Library</h2>
+        <div></div>
+    </section>
+</body>
+</html>
